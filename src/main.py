@@ -212,13 +212,13 @@ if __name__ == "__main__":
         title="Select Video File",
         filetypes=[("MP4 files", "*.mp4"), ("All files", "*.*")]
     )
-    #  Copy selected video to VIDEO_PATH (configured in config.py)
-    shutil.copy(selected_video, VIDEO_PATH)
-    print(f"✅ Video copied to: {VIDEO_PATH}")
     
     if not selected_video:
         print("❌ No video selected. Exiting. Using Test Video")
-        exit()
+    else:
+        #  Copy selected video to VIDEO_PATH (configured in config.py)
+        shutil.copy(selected_video, VIDEO_PATH)
+        print(f"✅ Video copied to: {VIDEO_PATH}")
     
     args.video = VIDEO_PATH
 
