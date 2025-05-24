@@ -5,7 +5,7 @@ This repository contains a pipeline to analyze badminton shot videos, extract po
 ## Folder Structure
 
 ```
-badminton_pipeline/
+ProjectKittyIV_PClubRecruitmentTask_TaranMohta_241095/
 │
 ├── data/                      # Sample input files (videos, CSVs)
 │
@@ -49,10 +49,14 @@ badminton_pipeline/
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/badminton_pipeline.git
-cd badminton_pipeline
-python3 -m venv venv
-source venv/bin/activate
+git clone https://github.com/tremendous1712/ProjectKittyIV_PClubRecruitmentTask_TaranMohta_241095.git
+cd ProjectKittyIV_PClubRecruitmentTask_TaranMohta_241095
+source venv/bin/activate     # For Linux/macOS
+# OR for Windows PowerShell:
+# .\venv\Scripts\Activate.ps1
+# OR for Windows Command Prompt:
+# .\venv\Scripts\activate.bat
+
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
