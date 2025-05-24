@@ -2,69 +2,67 @@
 
 This repository contains a pipeline to analyze badminton shot videos, extract pose keypoints, compute shot-wise features, predict shot type, and generate feedback based on predefined rules.
 
-## Installation
-
-```bash
-git clone https://github.com/yourusername/badminton_pipeline.git
-cd badminton_pipeline
-python3 -m venv venv
-source venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
-```
-
 ## Folder Structure
 
 ```
-badminton_pipeline/
+ProjectKittyIV_PClubRecruitmentTask_TaranMohta_241095/
 │
-├── data/                      # Sample input files (video, CSVs)
+├── data/                      # Sample input files (videos, CSVs)
 │
 ├── models/                    # Pretrained model .pkl files
 │
-├── notebooks/                 # Reference notebooks
+├── notebooks/                 # Reference notebooks, experiments
 │
 ├── output/                    # Generated outputs
-│   ├── frames/
-│   ├── cropped_frames/
-│   ├── keypoints_and_features/
+│   ├── frames/                # Extracted raw frames from videos
+│   ├── cropped_frames/        # Cropped frames focusing on court/players
+│   ├── keypoints_and_features/# JSON or CSV with keypoints and computed features
 │   ├── all_frames_keypoints.csv
-│   ├── H_test.json
+│   ├── H_test.json            # Homography matrix JSON file
 │   ├── crop_rect_coordinates.csv
 │   ├── shotwise_features.csv
 │   └── shotwise_feedback.csv
 │
-├── src/                       # Source code
-│   ├── config.py
-│   ├── utils/
-│   │   ├── video_utils.py
-│   │   ├── court_detection.py
-│   │   ├── homography.py
-│   │   ├── csv_utils.py
-│   │   └── feature_utils.py
+├── src/                       # Source code modules
+│   ├── config.py              # Configuration settings and constants
+│   ├── utils/                 # Utility scripts for modular functionality
+│   │   ├── video_utils.py     # Video reading, frame extraction
+│   │   ├── court_detection.py # Court detection and cropping logic
+│   │   ├── homography.py      # Homography matrix calculation and transformation
+│   │   ├── csv_utils.py       # CSV reading/writing helpers
+│   │   └── feature_utils.py   # Feature computation (angles, pose-based metrics)
 │   │
-│   ├── pipeline/
-│   │   ├── step1_extract_crop.py
-│   │   ├── step2_keypoints.py
-│   │   ├── step3_homography_transform.py
-│   │   ├── step4_shotwise_features.py
-│   │   └── step5_prediction_feedback.py
+│   ├── pipeline/              # Stepwise pipeline scripts
+│   │   ├── step1_extract_crop.py       # Extract frames and crop court area
+│   │   ├── step2_keypoints.py           # Pose keypoint extraction (MediaPipe or similar)
+│   │   ├── step3_homography_transform.py # Apply homography transforms to keypoints
+│   │   ├── step4_shotwise_features.py    # Aggregate shotwise features
+│   │   └── step5_prediction_feedback.py  # Model inference & feedback generation
 │   │
-│   ├── top_features_nearby.py
-│   └── main.py
+│   └── main.py                # Orchestrates the entire pipeline end-to-end
 │
-├── requirements.txt
-├── .gitignore
-└── README.md
+├── requirements.txt           # Python dependencies
+├── README.md                  # Project overview, setup, usage instructions
+
 ```
 
-## How to Run
+## Installation
 
 ```bash
-python src/main.py   --video data/example_video.mp4   --shots_csv data/shot_frames.csv   --models_dir models   --rules_csv data/badminton_pose_feedback_filled_f.csv   --output_dir output
+git clone https://github.com/tremendous1712/ProjectKittyIV_PClubRecruitmentTask_TaranMohta_241095.git
+cd ProjectKittyIV_PClubRecruitmentTask_TaranMohta_241095
+source venv/bin/activate     # For Linux/macOS
+# OR for Windows PowerShell:
+# .\venv\Scripts\Activate.ps1
+# OR for Windows Command Prompt:
+# .\venv\Scripts\activate.bat
+
+pip install --upgrade pip
+pip install -r requirements.txt
 ```
 
-## Data & Models
+## To Run
 
-- **data/**: Place your `example_video.mp4`, `shot_frames.csv`, and feedback rules CSV here.
-- **models/**: Place pretrained `xgb_model_label_0.pkl` … `xgb_model_label_3.pkl` here.
+```bash
+python src/main.py
+```
