@@ -57,10 +57,10 @@ badminton_pipeline/
 
 ```
 
-## How to Run
+## To Run
 
 ```bash
-python src/main.py   --video data/example_video.mp4   --shots_csv data/shot_frames.csv   --models_dir models   --rules_csv data/badminton_pose_feedback_filled_f.csv   --output_dir output
+python src/main.py
 ```
 
 ## Data & Models
