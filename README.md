@@ -2,17 +2,6 @@
 
 This repository contains a pipeline to analyze badminton shot videos, extract pose keypoints, compute shot-wise features, predict shot type, and generate feedback based on predefined rules.
 
-## Installation
-
-```bash
-git clone https://github.com/yourusername/badminton_pipeline.git
-cd badminton_pipeline
-python3 -m venv venv
-source venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
-```
-
 ## Folder Structure
 
 ```
@@ -55,6 +44,17 @@ badminton_pipeline/
 ├── requirements.txt           # Python dependencies
 ├── README.md                  # Project overview, setup, usage instructions
 
+```
+
+## Installation
+
+```bash
+git clone https://github.com/yourusername/badminton_pipeline.git
+cd badminton_pipeline
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
 ```
 
 ## To Run
