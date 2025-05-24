@@ -204,36 +204,37 @@ def show_shot_carousel(feedback_csv_path, frames_dir):
 if __name__ == "__main__":
     args = parse_args()
 
-    # 🔹 Prompt user to upload video
-    print("📁 Please select a video file to analyze...")
+    #  Prompt user to upload video
+    print("📁 Please select a video file to analyze... (If you want to use test video, click  on Cancel.)")
     root = tk.Tk()
     root.withdraw()
     selected_video = filedialog.askopenfilename(
         title="Select Video File",
         filetypes=[("MP4 files", "*.mp4"), ("All files", "*.*")]
     )
-    if not selected_video:
-        print("❌ No video selected. Exiting.")
-        exit()
-
-    # 🔹 Copy selected video to VIDEO_PATH (configured in config.py)
+    #  Copy selected video to VIDEO_PATH (configured in config.py)
     shutil.copy(selected_video, VIDEO_PATH)
     print(f"✅ Video copied to: {VIDEO_PATH}")
+    
+    if not selected_video:
+        print("❌ No video selected. Exiting. Using Test Video")
+        exit()
+    
     args.video = VIDEO_PATH
 
-    # 🔹 Clean output/ folders
+    #  Clean output/ folders
     clear_output_subfolders(args.output_dir)
 
-    # 🔹 Shot frame capture (OpenCV GUI)
+    #  Shot frame capture (OpenCV GUI)
     capture_shot_frames(video_path=args.video, output_csv_path=args.shots_csv)
 
-    # 🔹 Ensure required output folders exist
+    #  Ensure required output folders exist
     os.makedirs(args.output_dir,          exist_ok=True)
     os.makedirs(OUTPUT_FRAME_DIR,         exist_ok=True)
     os.makedirs(OUTPUT_CROPPED_DIR,       exist_ok=True)
     os.makedirs(OUTPUT_KEYPOINTS_DIR,     exist_ok=True)
 
-    # 🔹 Step 1: Extract & Crop frames
+    # Step 1: Extract & Crop frames
     step1_extract_and_crop(
         video_path=args.video,
         shots_csv=args.shots_csv,
@@ -241,16 +242,16 @@ if __name__ == "__main__":
         output_crop_dir=OUTPUT_CROPPED_DIR
     )
 
-    # 🔹 Step 2: Extract keypoints
+    # Step 2: Extract keypoints
     extract_and_save_keypoints()
 
-    # 🔹 Step 3: Apply homography
+    # Step 3: Apply homography
     apply_homography_on_csv()
 
-    # 🔹 Step 4: Build shotwise features
+    # Step 4: Build shotwise features
     build_shotwise_features()
 
-    # 🔹 Step 5: Predict + Feedback
+    # Step 5: Predict + Feedback
     step5_predict_and_feedback(
         models_dir=args.models_dir,
         shotwise_csv=FINAL_SHOT_FEATURES_CSV,
@@ -258,7 +259,7 @@ if __name__ == "__main__":
         out_csv=FINAL_FEEDBACK_CSV
     )
 
-    # 🔹 Show one impact frame per shot, using shot_no to find 'impact.jpg'
+    # Show one impact frame per shot, using shot_no to find 'impact.jpg'
     show_shot_carousel(FINAL_FEEDBACK_CSV, OUTPUT_FRAME_DIR)
 
     print("✅ Pipeline complete. Check the 'output/' folder for results.")
