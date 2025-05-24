@@ -1,0 +1,53 @@
+import numpy as np
+import pandas as pd
+from scipy.spatial.distance import pdist
+import os
+
+def extract_features_for_shot(shot_df):
+    shot_df = shot_df.interpolate().ffill().bfill()
+    n = 61
+    data = shot_df[[f"kp_{i}_{axis}" for i in range(33) for axis in ["x","y"]]].values.reshape(n,33,2)
+    mean_xy = data.mean(axis=0).flatten()
+    std_xy  = data.std(axis=0).flatten()
+    min_xy  = data.min(axis=0).flatten()
+    max_xy  = data.max(axis=0).flatten()
+
+    xs = data[:,16,0]
+    ys = data[:,16,1]
+    vels = np.sqrt(np.diff(xs)**2 + np.diff(ys)**2)
+    mean_vel = vels.mean(axis=0)
+    std_vel  = vels.std(axis=0)
+
+    dists = np.array([pdist(frame) for frame in data])
+    mean_dist = dists.mean(axis=0)
+    std_dist  = dists.std(axis=0)
+
+    extra = shot_df[shot_df["frame_idx"] == 30][
+        ["elbow_angle","torso_lean_angle","wrist_above_head","max_wrist_velocity","wrist_velocity_increase","shoulder_rotation_change"]
+    ].iloc[0].values
+
+    return np.concatenate([extra, mean_xy, std_xy, min_xy, max_xy, mean_vel, std_vel, mean_dist, std_dist])
+
+def build_shotwise_features(intermediate_csv, output_csv):
+    df = pd.read_csv(intermediate_csv)
+    results = []
+    for shot_no, grp in df.groupby("shot_no"):
+        if len(grp) != 61:
+            continue
+        feat = extract_features_for_shot(grp.sort_values("frame_idx"))
+        results.append(np.concatenate([[shot_no], feat]))
+    cols = ["shot_no", "elbow_angle", "torso_lean_angle", "wrist_above_head", "max_wrist_velocity", 
+            "wrist_velocity_increase", "shoulder_rotation_change"]
+    for stat in ["mean", "std", "min", "max"]:
+        for i in range(33):
+            cols += [f"kp_{i}_x_{stat}", f"kp_{i}_y_{stat}"]
+    for axis in ["mean_vel", "std_vel"]:
+        cols += [f"kp_{i}_{axis}" for i in range(33)]
+    num_pairs = (33 * 32) // 2
+    for stat in ["mean_dist", "std_dist"]:
+        cols += [f"pair_{j}_{stat}" for j in range(num_pairs)]
+
+    out_df = pd.DataFrame(results, columns=cols)
+    os.makedirs(os.path.dirname(output_csv), exist_ok=True)
+    out_df.to_csv(output_csv, index=False)
+    return out_df

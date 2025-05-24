@@ -1,0 +1,8 @@
+numpy
+pandas
+opencv-python
+mediapipe
+scipy
+tqdm
+joblib
+xgboost
