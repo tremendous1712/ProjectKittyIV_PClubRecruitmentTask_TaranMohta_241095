@@ -7,7 +7,6 @@ from .court_detection import get_court_corners
 
 def compute_and_save_homography(img_path, json_path):
     """
-    EXACTLY your original:
     1) get_court_corners → 4 points
     2) findHomography to real coordinates
     3) save JSON
@@ -22,7 +21,6 @@ def compute_and_save_homography(img_path, json_path):
 
 def compute_and_save_crop_rect(corners, csv_path):
     """
-    EXACTLY your original:
     1) bottom-left → corners[3]
     2) mid of TR & BR → (tr[0]+br[0])/2, (tr[1]+br[1])/2
     3) save to CSV with columns x1,y1,x2,y2

@@ -5,7 +5,7 @@ from config import INTERMEDIATE_CSV, FINAL_SHOT_FEATURES_CSV
 
 def extract_features(shot_df):
     """
-    EXACTLY your original: interpolate, compute mean/std/min/max, velocity features, pairwise distances, extra mid-frame features.
+    interpolate, compute mean/std/min/max, velocity features, pairwise distances, extra mid-frame features.
     """
     shot_df = shot_df.interpolate().ffill().bfill()
     n = 61
@@ -35,7 +35,6 @@ def build_shotwise_features(
     output_csv=FINAL_SHOT_FEATURES_CSV
 ):
     """
-    EXACTLY your original:
     Read INTERMEDIATE_CSV, group by shot_no, extract_features, assemble columns, save to output_csv.
     """
     df = pd.read_csv(intermediate_csv)

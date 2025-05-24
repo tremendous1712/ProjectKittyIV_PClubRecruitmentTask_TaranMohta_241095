@@ -10,7 +10,6 @@ def apply_homography_on_csv(
     h_test_json=H_TEST_JSON
 ):
     """
-    EXACTLY your original:
     1) Load H_test from JSON
     2) H_train fixed → compute inv
     3) For each row in intermediate_csv, apply homography using get_crop_size() for w,h

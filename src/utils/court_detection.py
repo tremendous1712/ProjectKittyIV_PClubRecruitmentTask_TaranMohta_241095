@@ -19,7 +19,6 @@ def cluster_points(points, nclusters=4):
 
 def get_court_corners(image_path):
     """
-    EXACTLY your original function:
     Convert to grayscale, threshold, Canny, HoughLinesP, filter, find intersections, cluster to 4, sort.
     """
     img = cv2.imread(image_path)

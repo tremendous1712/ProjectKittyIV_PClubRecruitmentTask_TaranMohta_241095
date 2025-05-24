@@ -10,7 +10,6 @@ from utils.csv_utils import save_csv
 
 def extract_and_save_keypoints():
     """
-    EXACTLY your original logic:
     For each shot folder under OUTPUT_CROPPED_DIR/shot_*, read 61 frames + 'impact.jpg',
     run MediaPipe Pose, collect all kp_{k}_x/y plus elbow_angle, torso_lean_angle, wrist_above_head at idx==30,
     then compute time-based features for each shot and save all to INTERMEDIATE_CSV.

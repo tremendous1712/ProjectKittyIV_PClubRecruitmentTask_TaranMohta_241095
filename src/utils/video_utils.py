@@ -59,7 +59,6 @@ def save_first_frame_from_csv(
     output_dir=os.path.join(os.path.dirname(VIDEO_PATH), "..")  # fallback to OUTPUT_DIR
 ):
     """
-    EXACTLY as in your original:
     Read shot_frames.csv, get first 'frame_num', open video, save that frame as first_frame.jpg.
     """
     df = pd.read_csv(csv_path)
@@ -83,7 +82,6 @@ def save_first_frame_from_csv(
 
 def save_and_crop_frames(df_shots):
     """
-    EXACTLY as in your original blob:
     1) Read crop rectangle from CROP_RECT_CSV.
     2) Cast to int, swap if needed.
     3) For each shot, extract ±FRAME_RANGE frames, save raw & cropped.
@@ -139,7 +137,6 @@ def save_and_crop_frames(df_shots):
 
 def get_crop_size():
     """
-    EXACTLY as in your original:
     Read CROP_RECT_CSV, cast to int, swap if needed, return (width, height).
     """
     crop_rect = pd.read_csv(CROP_RECT_CSV)
