@@ -233,7 +233,7 @@ if __name__ == "__main__":
     os.makedirs(OUTPUT_CROPPED_DIR,       exist_ok=True)
     os.makedirs(OUTPUT_KEYPOINTS_DIR,     exist_ok=True)
 
-    🔹 Step 1: Extract & Crop frames
+    # 🔹 Step 1: Extract & Crop frames
     step1_extract_and_crop(
         video_path=args.video,
         shots_csv=args.shots_csv,
