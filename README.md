@@ -62,8 +62,3 @@ badminton_pipeline/
 ```bash
 python src/main.py
 ```
-
-## Data & Models
-
-- **data/**: Place your `example_video.mp4`, `shot_frames.csv`, and feedback rules CSV here.
-- **models/**: Place pretrained `xgb_model_label_0.pkl` … `xgb_model_label_3.pkl` here.
