@@ -54,8 +54,10 @@ cd ProjectKittyIV_PClubRecruitmentTask_TaranMohta_241095
 python3 -m venv venv
 source venv/bin/activate     # For Linux/macOS
 # OR for Windows PowerShell:
+# python -m venv venv
 # .\venv\Scripts\Activate.ps1
 # OR for Windows Command Prompt:
+# python -m venv venv
 # .\venv\Scripts\activate.bat
 
 pip install --upgrade pip
