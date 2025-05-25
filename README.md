@@ -58,7 +58,7 @@ source venv/bin/activate     # For Linux/macOS
 # .\venv\Scripts\Activate.ps1
 # OR for Windows Command Prompt:
 # python -m venv venv
-# .\venv\Scripts\activate.bat
+# venv\Scripts\activate.bat
 
 pip install --upgrade pip
 pip install -r requirements.txt
