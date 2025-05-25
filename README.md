@@ -51,6 +51,7 @@ ProjectKittyIV_PClubRecruitmentTask_TaranMohta_241095/
 ```bash
 git clone https://github.com/tremendous1712/ProjectKittyIV_PClubRecruitmentTask_TaranMohta_241095.git
 cd ProjectKittyIV_PClubRecruitmentTask_TaranMohta_241095
+python3 -m venv venv
 source venv/bin/activate     # For Linux/macOS
 # OR for Windows PowerShell:
 # .\venv\Scripts\Activate.ps1
